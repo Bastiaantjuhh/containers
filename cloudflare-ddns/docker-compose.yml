@@ -1,0 +1,19 @@
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
+    restart: unless-stopped
+    cap_add:
+      - SETUID
+      - SETGID
+    cap_drop:
+      - all
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CF_API_TOKEN=${CF_API_TOKEN}
+      - DOMAINS=${DOMAINS}
+      - PROXIED=${PROXIED}

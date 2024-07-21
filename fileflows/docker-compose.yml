@@ -1,0 +1,14 @@
+services:
+  fileflows:
+    image: revenz/fileflows
+    container_name: fileflows
+    restart: unless-stopped
+    ports:
+      - "19200:5000"
+    volumes:
+      - ./fileflows/temp:/temp
+      - ./fileflows/data:/app/Data
+      - ./fileflows/logs:/app/Logs
+      # Directories;
+      - ./fileflows/films:/media/videos
+      - ./fileflows/series:/media/series

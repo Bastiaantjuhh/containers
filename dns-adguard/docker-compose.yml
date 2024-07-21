@@ -1,0 +1,13 @@
+services:
+  dms-adguard-home:
+    image: adguard/adguardhome:latest
+    container_name: dms-adguard-home
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
+    ports:
+      - 53:53
+      - 3000:3000

@@ -1,0 +1,9 @@
+# Microsoft VScode
+.vscode/*
+.history/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*

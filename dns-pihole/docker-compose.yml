@@ -1,0 +1,17 @@
+services:
+  dns-pihole:
+    image: pihole/pihole:latest
+    container_name: dns-pihole
+    restart: unless-stopped
+    ports:
+      - 53:53
+      - 80:80
+    environment:
+      - TZ=${TIMEZONE}
+      - WEBPASSWORD=${PASSWORD}
+      - DNSMASQ_LISTENING=all
+      - PIHOLE_DNS_=${DNS_SERVERS}
+      - DNSSEC=${DNSSEC}
+    volumes:
+      - './pihole:/etc/pihole'
+      - './dnsmasq:/etc/dnsmasq.d'

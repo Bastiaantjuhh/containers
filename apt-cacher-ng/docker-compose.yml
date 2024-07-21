@@ -1,0 +1,11 @@
+services:
+  apt-cacher-ng:
+    image: sameersbn/apt-cacher-ng:latest
+    container_name: apt-cacher-ng
+    restart: unless-stopped
+    ports:
+      - 3142:3142
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/docker/apt-cacher-ng:/var/cache/apt-cacher-ng

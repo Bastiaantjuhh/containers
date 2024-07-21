@@ -1,0 +1,10 @@
+services:
+  orbital-sync:
+    image: mattwebbio/orbital-sync:1
+    container_name: pihole-sync
+    environment:
+      - INTERVAL_MINUTES=${INTERVAL}
+      - PRIMARY_HOST_BASE_URL=${PRIMARY_URL}
+      - PRIMARY_HOST_PASSWORD=${PRIMARY_PASS}
+      - SECONDARY_HOST_1_BASE_URL=${SECOND_URL}
+      - SECONDARY_HOST_1_PASSWORD=${SECOND_PASS}

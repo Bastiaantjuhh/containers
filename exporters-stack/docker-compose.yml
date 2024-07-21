@@ -1,0 +1,59 @@
+services:
+  pihole-exporter:
+    image: ekofr/pihole-exporter
+    container_name: exporter-pihole
+    restart: always
+    ports:
+      - 9617:9617
+    environment:
+      - PIHOLE_HOSTNAME=${PIHOLE_HOSTS}
+      - PIHOLE_PORT=${PIHOLE_PORT}
+      - PIHOLE_PASSWORD=${PIHOLE_PASS}
+      - INTERVAL=1m
+      - PORT=9617
+
+  speedtest-exporter:
+    image: miguelndecarvalho/speedtest-exporter:latest
+    container_name: exporter-speedtest
+    restart: always
+    environment:
+      - SPEEDTEST_PORT=9798
+      - SPEEDTEST_SERVER=${SPEEDTEST_SERVER}
+    ports:
+      - 9798:9798
+
+  sonarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:latest
+    container_name: exporter-sonarr
+    restart: always
+    command: ["sonarr"]
+    environment:
+      - PORT=9707
+      - URL=${SONARR_URL}
+      - APIKEY=${SONARR_API}
+    ports:
+      - "9707:9707"
+
+  radarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:latest
+    container_name: exporter-radarr
+    restart: always
+    command: ["radarr"]
+    environment:
+      - PORT=9708
+      - URL=${RADARR_URL}
+      - APIKEY=${RADARR_API}
+    ports:
+      - "9708:9708"
+
+  prowlarr-exporter:
+    image: ghcr.io/onedr0p/exportarr:latest
+    container_name: exporter-prowlarr
+    restart: always
+    command: ["prowlarr"]
+    environment:
+      - PORT=9709
+      - URL=${PROWLARR_URL}
+      - APIKEY=${PROWLARR_API}
+    ports:
+      - "9709:9709"

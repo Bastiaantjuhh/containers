@@ -1,0 +1,38 @@
+services:
+  datalore:
+    image: jetbrains/datalore-server:2024.3
+    container_name: jb-datalore-server
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    expose: [ "8081", "5050", "4060" ]
+    networks:
+      - datalore-agents-network
+      - datalore-backend-network
+    volumes:
+      - datalore-storage:/opt/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      #DATALORE_PUBLIC_URL: "https://datalore.example.com"
+      DB_PASSWORD: ${DB_PASS}
+
+  postgresql:
+    image: jetbrains/datalore-postgres:2024.3
+    container_name: jb-datalore-database
+    restart: unless-stopped
+    expose: [ "5432" ]
+    networks:
+      - datalore-backend-network
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+
+volumes:
+  postgresql-data: { }
+  datalore-storage: { }
+networks:
+  datalore-agents-network:
+    name: datalore-agents-network
+  datalore-backend-network:
+    name: datalore-backend-network

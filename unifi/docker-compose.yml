@@ -1,0 +1,44 @@
+services:
+  unifi:
+    container_name: unifi
+    hostname: unifi
+    image: lscr.io/linuxserver/unifi-network-application:latest
+    restart: unless-stopped
+    networks:
+      - backend            # backend communications
+      - caddy_caddynet     # frontend communications
+    ports:
+      - 8443:8443          # web admin UI
+      - 3478:3478/udp      # STUN
+      - 10001:10001/udp    # AP discovery
+      - 8080:8080          # device communication
+#      - 1900:1900/udp     # only required for Make controller discoverable on L2 network option
+#      - 8843:8843         # guest portal HTTPS redirect port (optional)
+#      - 8880:8880         # guest portal HTTP redirect port (optional)
+#      - 6789:6789         # mobile throughput test (optional)
+#      - 5514:5514/udp     # remote syslog (optional)
+    env_file:
+      - .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/config
+    depends_on:
+      - unify-mongodb
+
+  unify-mongodb:
+    container_name: unify-mongodb
+    hostname: unify-mongodb
+    image: mongo:4.4
+    restart: unless-stopped
+    networks:
+      - backend
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./db:/data/db
+      - ./db-init/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+networks:
+  caddy_caddynet:
+    external: true
+  backend:
+    driver: bridge

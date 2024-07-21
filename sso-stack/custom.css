@@ -1,0 +1,19 @@
+.pf-c-login__header {
+    display: none;
+}
+
+.pf-c-login__footer {
+    display: none;
+}
+
+a[href^="https://goauthentik.io"] {
+    display: none !important;
+}
+
+a[href^="https://unsplash.com"] {
+    display: none !important;
+}
+
+:root {
+    --ak-flow-background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}

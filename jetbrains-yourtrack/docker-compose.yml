@@ -1,0 +1,12 @@
+services:
+  youtrack:
+    image: jetbrains/youtrack:2023.3.24329
+    container_name: jetbrains-youtrack
+    restart: unless-stopped
+    ports:
+      - 7777:8080
+    volumes:
+      - ./data:/opt/youtrack/data
+      - ./conf:/opt/youtrack/conf
+      - ./logs:/opt/youtrack/logs
+      - ./backups:/opt/youtrack/backups

@@ -1,0 +1,12 @@
+services:
+
+  filebot-node:
+    container_name: filebot-node
+    image: rednoah/filebot:node
+    restart: unless-stopped
+    volumes:
+      - ./filebot/data:/data
+      - ./filebot/storage:/volume1
+    ports:
+      - 5452:5452
+      - 5453:5453
