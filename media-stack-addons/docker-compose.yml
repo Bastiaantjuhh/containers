@@ -1,0 +1,86 @@
+version: "3.8"
+services:
+
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: media-overseerr
+    restart: "unless-stopped"
+    # network_mode: "service:gluetun"
+    # depends_on:
+    #  - gluetun
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TIMEZONE}
+      - PORT=5055
+    volumes:
+      - ./overseerr:/app/config
+    ports:
+      - 5055:5055
+
+  cleanarr:
+    image: selexin/cleanarr:latest
+    container_name: media-cleanarr
+    restart: unless-stopped
+    # network_mode: "service:gluetun"
+    # depends_on:
+    #   - gluetun
+    ports:
+      - 5070:80
+    environment:
+      - BYPASS_SSL_VERIFY=1
+      - PLEX_TOKEN=${PLEX_TOKEN}
+      - PLEX_BASE_URL=${PLEX_BASE_URL}
+      - LIBRARY_NAMES=${LIBRARY_NAMES}
+    volumes:
+      - ./cleanarr:/config
+
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    restart: unless-stopped
+    volumes:
+      - ./tautulli:/config
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=${TIMEZONE}
+    ports:
+      - 8181:8181
+
+  plextraktsync:
+    image: ghcr.io/taxel/plextraktsync:latest
+    container_name: media-trakt-sync
+    restart: "unless-stopped"
+    command: sync
+    profiles: [ "schedule" ]
+    volumes:
+      - ./plextraktsync:/app/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+
+  scheduler:
+    image: mcuadros/ofelia:latest
+    container_name: media-trakt-scheduler
+    restart: unless-stopped
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      ofelia.job-run.plextraktsync.schedule: "0 6,18 * * *"
+      ofelia.job-run.plextraktsync.container: "plextraktsync"
+      ofelia.job-run.plextraktsync.command: "sync"
+
+  kometa:
+    image: kometateam/kometa
+    container_name: kometa
+    environment:
+      - TZ=${TIMEZONE}
+      - KOMETA_RUN=true
+      - KOMETA_CONFIG=/config/config.yml
+      - KOMETA_OVERLAYS_ONLY=true
+      - KOMETA_RUN_LIBRARIES=Films
+    volumes:
+      - ./config:/config
+    restart: unless-stopped

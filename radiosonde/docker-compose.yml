@@ -1,0 +1,14 @@
+services:
+
+  radiosonde_auto_rx:
+    image: ghcr.io/projecthorus/radiosonde_auto_rx:latest
+    container_name: radiosonde_auto_rx
+    privileged: true
+    devices:
+      - /dev/bus/usb
+    ports:
+      - 5000:5000
+    restart: always
+    volumes:
+      - ./station.cfg:/opt/auto_rx/station.cfg:ro
+      - ./logs/:/opt/auto_rx/log

@@ -6,6 +6,10 @@
     display: none;
 }
 
+.ak-brand {
+    display: none;
+}
+
 a[href^="https://goauthentik.io"] {
     display: none !important;
 }
@@ -14,6 +18,7 @@ a[href^="https://unsplash.com"] {
     display: none !important;
 }
 
-:root {
-    --ak-flow-background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+.pf-c-background-image {
+    --ak-flow-background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%) !important;
+    /* --ak-flow-background: url("") !important; */
 }

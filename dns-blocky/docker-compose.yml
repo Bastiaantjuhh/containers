@@ -1,0 +1,17 @@
+services:
+  blocky:
+    image: spx01/blocky
+    container_name: blocky
+    ports:
+      - 53:53
+      - 4000:4000
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./config.yml:/app/config.yml
+    restart: always
+    labels:
+      - com.centurylinklabs.watchtower.lifecycle.pre-check="/sync.sh"
+      - com.centurylinklabs.watchtower.lifecycle.pre-update="/dump-data.sh"
+      - com.centurylinklabs.watchtower.lifecycle.post-update="/restore-data.sh"
+      - com.centurylinklabs.watchtower.lifecycle.post-check="/send-heartbeat.sh"
