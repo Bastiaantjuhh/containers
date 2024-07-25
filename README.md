@@ -11,6 +11,7 @@ My personal Docker stacks, containers and Docker compose files
 ## Stacks
 Directory | Stack | Note
 --- | --- | ---
+ads-b | [sdr-enthusiasts containers](https://github.com/sdr-enthusiasts), [gatus](https://github.com/TwiN/gatus) and [Apache with PHP](https://hub.docker.com/_/php)  | My personalized ADS-B aircraft radar stack. Sending data to FlightAware, FlightRadar, RadarBox, PlaneFinder & ADS-B Exchange. Using one single RTL SDR device.
 apt-cacher-ng | [sameersbn/apt-cacher-ng](https://hub.docker.com/r/sameersbn/apt-cacher-ng) | Apt_Cache_ng is A caching proxy. Specialized for package files from Linux distributors, primarily for Debian
 cloudflare-ddns | [favonia/cloudflare-ddns](https://hub.docker.com/r/favonia/cloudflare-ddns) | A small, feature-rich, and robust Cloudflare DDNS updater
 core-stack | [Portainer agent](https://www.portainer.io/), [Dockge](https://github.com/louislam/dockge), [AutoHeal](https://github.com/willfarrell/docker-autoheal), [cAdvisor](https://github.com/google/cadvisor), [Watchtower](https://containrrr.dev/watchtower/) & [Dozzle](https://dozzle.dev/) | My base core stack for every container host server
