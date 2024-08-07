@@ -30,6 +30,7 @@ jetbrains-teamcity | [Jetbrains TeamCity](https://www.jetbrains.com/teamcity/) |
 jetbrains-yourtrack | [Jetbrains YourTrack](https://www.jetbrains.com/youtrack/) | Everything in one place. Track tasks, manage projects, maintain a knowledge base, support your customers, collaborate, and deliver great products.
 media-stack | [Radarr](https://radarr.video/), [Sonarr](https://sonarr.tv/), [Bazarr](https://www.bazarr.media/), [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr), [Prowlarr](https://prowlarr.com/), [qBittorrent](https://www.qbittorrent.org/) and [Gluetun](https://github.com/qdm12/gluetun) | Media automation for Downloads
 media-stack-addons | [Overseerr](https://overseerr.dev/), [Cleanarr](https://github.com/Cleanarr/Cleanarr), [Tautulli](https://tautulli.com/), [taxel/plextraktsync](https://github.com/Taxel/PlexTraktSync), [mcuadros/ofelia](https://github.com/mcuadros/ofelia) and [Kometa](https://kometa.wiki/) | Media stack addons
+minecraft | [Docker Minecraft Server](https://github.com/itzg/docker-minecraft-server) | Docker image that provides a Minecraft Server that will automatically download selected version at startup
 minio | [MinIO](https://min.io/) | S3 & Kubernetes Native Object Storage
 overseerr | [Overseerr](https://overseerr.dev/) | Request management and media discovery tool for the Plex ecosystem
 pihole-sync | [pihole-sync](https://github.com/mattwebbio/orbital-sync) | Orbital Sync synchronizes multiple Pi-hole instances for high availability (HA) using the built-in "teleporter"
